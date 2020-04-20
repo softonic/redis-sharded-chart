@@ -1,0 +1,120 @@
+# Default values for redis-sharded.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: redis
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podLabels: {}
+podAnnotations: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+priorityClassName: null
+
+persistence:
+  enabled: true
+  path: /data
+  subPath: ""
+  accessModes:
+  - ReadWriteOnce
+  size: 8Gi
+  matchLabels: {}
+  matchExpressions: {}
+  storageClass: null
+  existingClaim: null
+
+redisPort: 6379
+configmap: |-
+  # Enable AOF https://redis.io/topics/persistence#append-only-file
+  appendonly yes
+  # Disable RDB persistence, AOF persistence already enabled.
+  save ""
+
+prometheus:
+  enabled: true
+  podLabels: {}
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "9121"
+  image:
+    repository: oliver006/redis_exporter
+    tag: v1.5.3
+    pullPolicy: IfNotPresent
+  resources: {}
+
+twemproxy:
+  enabled: false
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  image:
+    repository: "softonic/twemproxy"
+    tag: "0.4.1"
+    pullPolicy: IfNotPresent
+  replicaCount: 1
+  config: {}
+  ##
+  #  https://github.com/twitter/twemproxy#configuration
+  ##
+  # hash: fnv1a_64
+  # distribution: ketama
+  # timeout: 100
+  # preconnect: true
+  podLabels: {}
+  podAnnotations: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  resources: {}

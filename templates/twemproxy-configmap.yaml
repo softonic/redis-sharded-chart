@@ -1,0 +1,11 @@
+{{- if .Values.twemproxy.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "redis-sharded.fullname" . }}-twemproxy-config
+  labels:
+    {{- include "redis-sharded.labels" . | nindent 4 }}
+data:
+  nutcracker.conf: |-
+{{ include "redis-sharded.nutcrackerConfig" . | indent 4}}
+{{- end }}
