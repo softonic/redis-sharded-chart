@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "redis-sharded.fullname" . }}-backend
+  labels:
+    {{- include "redis-sharded.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: redis
+    port: {{ .Values.redisPort }}
+    targetPort: redis
+  selector:
+    {{- include "redis-sharded.selectorLabels" . | nindent 4 }}
+---
+{{- if .Values.twemproxy.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "redis-sharded.fullname" . }}
+  labels:
+    {{- include "redis-sharded.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: redis
+    port: {{ .Values.redisPort }}
+    targetPort: redis
+  selector:
+    {{- include "redis-sharded.twemproxySelectorLabels" . | nindent 4 }}
+---
+{{- end }}
