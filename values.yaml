@@ -71,8 +71,11 @@ redisPort: 6379
 configmap: |-
   # Enable AOF https://redis.io/topics/persistence#append-only-file
   appendonly yes
-  # Disable RDB persistence, AOF persistence already enabled.
+  # Disable RDB persistence, AOF persistence already enabled.v
   save ""
+updateStrategy:
+  type: RollingUpdate
+podManagementPolicy: OrderedReady
 
 prometheus:
   enabled: true
