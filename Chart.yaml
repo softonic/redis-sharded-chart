@@ -4,3 +4,7 @@ description: A Helm chart for sharded redis
 type: application
 version: 0.1.0
 appVersion: 5.0.8
+icon: https://cdn.worldvectorlogo.com/logos/redis.svg
+keywords:
+  - redis
+  - shard
