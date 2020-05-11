@@ -89,7 +89,9 @@ Create the name of the service account to use
 redis:
   listen: 0.0.0.0:{{ .Values.redisPort }}
   redis: true
-{{ toYaml .Values.twemproxy.config | indent 2 }}
+{{- with .Values.twemproxy.config }}
+{{ toYaml . | indent 2 }}
+{{- end }}
   servers:
 {{ include "redis-sharded.connectionsList" . | indent 2 }}
 {{- end -}}
