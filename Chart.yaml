@@ -2,8 +2,8 @@ apiVersion: v2
 name: redis-sharded
 description: A Helm chart for sharded redis
 type: application
-version: 0.1.2
-appVersion: 5.0.8
+version: 0.2.0
+appVersion: 6.0.6
 icon: https://cdn.worldvectorlogo.com/logos/redis.svg
 keywords:
   - redis
