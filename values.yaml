@@ -84,6 +84,8 @@ prometheus:
   #  prometheus.io/scrape: "true"
   #  prometheus.io/path: "/metrics"
   #  prometheus.io/port: "9121"
+  # Exporter port
+  port: 9121
   image:
     repository: oliver006/redis_exporter
     tag: v1.9.0

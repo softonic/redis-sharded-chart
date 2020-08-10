@@ -91,7 +91,7 @@ spec:
           value: {{ include "redis-sharded.fullname" . }}
         ports:
         - name: metrics
-          containerPort: 9121
+          containerPort: {{ .Values.prometheus.port }}
         resources:
 {{ toYaml .Values.prometheus.resources | indent 10 }}
 {{- end }}
