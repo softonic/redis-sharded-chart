@@ -80,15 +80,33 @@ podManagementPolicy: OrderedReady
 prometheus:
   enabled: true
   podLabels: {}
-  podAnnotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/path: "/metrics"
-    prometheus.io/port: "9121"
+  podAnnotations: {}
+  #  prometheus.io/scrape: "true"
+  #  prometheus.io/path: "/metrics"
+  #  prometheus.io/port: "9121"
   image:
     repository: oliver006/redis_exporter
-    tag: v1.5.3
+    tag: v1.9.0
     pullPolicy: IfNotPresent
   resources: {}
+  serviceMonitor:
+    # When set true then use a ServiceMonitor to configure scraping
+    enabled: true
+    # Set the namespace the ServiceMonitor should be deployed
+    namespace: null
+    # additionalLabels is the set of additional labels to add to the ServiceMonitor
+    additionalLabels: {}
+    # Set how frequently Prometheus should scrape
+    # interval: 30s
+    interval: null
+    # Set path to exporter telemetry-path
+    # path: /metrics
+    path: null
+    # Set timeout for scrape
+    # timeout: 10s
+    timeout: null
+    ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
+    honorLabels: true
 
 twemproxy:
   enabled: false
