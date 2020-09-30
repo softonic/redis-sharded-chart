@@ -1,0 +1,11 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "redis-sharded.fullname" . }}
+  labels:
+    {{- include "redis-sharded.labels" . | nindent 4 }}
+spec:
+  maxUnavailable: {{ .Values.maxUnavailable }}
+  selector:
+    matchLabels:
+      {{- include "redis-sharded.selectorLabels" . | nindent 6 }}
