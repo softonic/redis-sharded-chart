@@ -62,6 +62,10 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
         - redis-server
+        args:
+        {{- with .Values.args }}
+{{- . | toYaml | nindent 8 }}
+        {{- end }}
         - /etc/redis/redis.conf
         env:
         - name: REDIS_REPLICATION_MODE

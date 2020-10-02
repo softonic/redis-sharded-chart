@@ -70,6 +70,7 @@ persistence:
   existingClaim: null
 
 redisPort: 6379
+args: []
 configmap: |-
   # Enable AOF https://redis.io/topics/persistence#append-only-file
   appendonly yes
