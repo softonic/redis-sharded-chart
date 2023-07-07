@@ -93,7 +93,10 @@ prometheus:
     repository: oliver006/redis_exporter
     tag: v1.9.0
     pullPolicy: IfNotPresent
-  resources: {}
+  resources:
+    requests:
+      cpu: 5m
+      memory: 16Mi
   serviceMonitor:
     # When set true then use a ServiceMonitor to configure scraping
     enabled: true
