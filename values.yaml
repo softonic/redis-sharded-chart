@@ -6,6 +6,7 @@ replicaCount: 1
 
 image:
   repository: redis
+  # tag: 6.2.18
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
