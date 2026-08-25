@@ -6,7 +6,8 @@ replicaCount: 1
 
 image:
   repository: redis
-  # tag: 6.2.18
+  # Defaults to the chart's appVersion. Set only to pin a different tag on purpose.
+  # tag: 8.10.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
